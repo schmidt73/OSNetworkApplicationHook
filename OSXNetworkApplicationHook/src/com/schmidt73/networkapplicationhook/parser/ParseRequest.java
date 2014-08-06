@@ -96,10 +96,8 @@ public class ParseRequest {
 	 */
 
 	public static boolean checkIfWebRequest(String buffer) {
-		if (buffer.startsWith("POST") || buffer.startsWith("GET")
-				|| buffer.startsWith("PUT")
-				|| buffer.toLowerCase().contains("host:"))
-			return true;
-		return false;
+		// if (buffer.toLowerCase().contains("host:"))
+		return true;
+		// return false;
 	}
 }
